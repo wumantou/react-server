@@ -7,6 +7,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.security.Principal;
 
@@ -14,6 +15,7 @@ import java.security.Principal;
  * webSocket控制器
  */
 @Controller
+@CrossOrigin
 public class WebSocketController extends BaseController {
 
     //通过simpMessagingTemplate向浏览器发送消息
@@ -36,12 +38,13 @@ public class WebSocketController extends BaseController {
     @MessageMapping("/welcome") //当浏览器向服务端发送请求时,通过@MessageMapping映射/welcome这个地址,类似于@ResponseMapping
     @SendTo("/topic/getResponse")//当服务器有消息时,会对订阅了@SendTo中的路径的浏览器发送消息
     public Result say(String message) {
-        try {
-            //睡眠3秒
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return ok("welcome," + message + "!");
+        System.out.println("access message" + message);
+//        try {
+//            //睡眠3秒
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        return ok("welcome! this is react-server!");
     }
 }

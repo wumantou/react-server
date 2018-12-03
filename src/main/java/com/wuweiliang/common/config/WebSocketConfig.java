@@ -21,9 +21,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {//注册STOMP协议的节点(endpoint),并映射指定的url
         //注册一个STOMP的endpoint,并指定使用SockJS协议
-        registry.addEndpoint("/endpointAric").setAllowedOrigins("http://localhost");
+        registry.addEndpoint("/endpointAric").setAllowedOrigins("*");
         //注册名为"endpointChat"的endpoint
-        registry.addEndpoint("/endpointChat").setAllowedOrigins("*");
+        registry.addEndpoint("/endpointChat").setAllowedOrigins("*").withSockJS();
     }
 
     @Override
